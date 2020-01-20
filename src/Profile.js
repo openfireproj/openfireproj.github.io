@@ -2,7 +2,7 @@ import React from 'react';
 
 var ls = require('local-storage');
 
-class Portfolio extends React.Component {
+class Profile extends React.Component {
   constructor(props) {
     super(props);
     var default_ = {
@@ -50,4 +50,4 @@ class Portfolio extends React.Component {
   }
 }
 
-export default Portfolio;
+export default Profile;

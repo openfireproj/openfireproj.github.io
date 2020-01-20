@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import  Toolbar from '@material-ui/core/Toolbar';
 import  Typography from '@material-ui/core/Typography';
 
-import Portfolio from './Portfolio';
+import Profile from './Profile';
 import Compound from './Compound';
 
 function App() {
@@ -16,8 +16,9 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <Portfolio/>
       <Compound/>
+
+      <Profile/>
     </div>
   );
 }
