@@ -4,6 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import  Toolbar from '@material-ui/core/Toolbar';
 import  Typography from '@material-ui/core/Typography';
 
+import Portfolio from './Portfolio';
+
 function App() {
   return (
     <div>
@@ -12,6 +14,8 @@ function App() {
           <Typography variant="h6">Open Fire</Typography>
         </Toolbar>
       </AppBar>
+
+      <Portfolio/>
     </div>
   );
 }
