@@ -5,6 +5,7 @@ import  Toolbar from '@material-ui/core/Toolbar';
 import  Typography from '@material-ui/core/Typography';
 
 import Portfolio from './Portfolio';
+import Compound from './Compound';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       </AppBar>
 
       <Portfolio/>
+      <Compound/>
     </div>
   );
 }
