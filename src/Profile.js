@@ -2,7 +2,8 @@ import React from 'react';
 
 var ls = require('local-storage');
 
-class Profile extends React.Component {
+
+class ProfileComponent extends React.Component {
   constructor(props) {
     super(props);
     var default_ = {
@@ -50,4 +51,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default ProfileComponent;
