@@ -1,3 +1,24 @@
+let pow = Math.pow
+
+/** @function compoundInterest
+    @param principal original sum of money
+    @param interestRate interest rate
+    @param periods
+    @param compoundsPerPeriod (optional, defaults: 1) number of times interest is compounded per period.
+
+    @returns amount
+
+*/
+const compoundInterest =
+(
+  principal,
+  interestRate,
+  periods,
+  compoundsPerPeriod
+  ) => {
+    return principal*pow(1+(interestRate/compoundsPerPeriod), compoundsPerPeriod*periods);
+};
+
 const compoundInterestWithMonthlyContributions = 
 (
   principal,
