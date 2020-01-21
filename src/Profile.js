@@ -1,7 +1,25 @@
 import React from 'react';
+import { TextField } from '@material-ui/core';
 
-var ls = require('local-storage');
 
+let storage = require('local-storage');
+
+let Profile = {
+  // Sorry
+  get: (key) => {
+    return storage.get(key);
+  },
+
+  set: (key, value) => {
+    storage.set(key, (value));
+  },
+
+  all: () => {
+    let state = storage.get('state');
+
+    return state;
+  }
+}
 
 class ProfileComponent extends React.Component {
   constructor(props) {
@@ -11,7 +29,7 @@ class ProfileComponent extends React.Component {
         salary: 0,
         age: 0
     }
-    var stored = ls.get('state');
+    var stored = Profile.get('state');
 
     this.state = stored ? stored : default_;
     this.update = this.update.bind(this);
@@ -26,27 +44,27 @@ class ProfileComponent extends React.Component {
     };
 
     this.setState(state => (newState));
-    ls.set('state', newState);
+    Profile.set('state', newState);
   }
 
   render() {
+    const attribs = []
+    for (const key in Profile.all()) {
+      attribs.push(
+        <TextField id={key} label={key} key={key}
+                value={Profile.all()[key]} 
+              variant="outlined" 
+             onChange={this.update} />
+      )
+    }
+
     return (
-      <fieldset>
-        <form id="worth">
-          <label>Net Worth</label>
-          <input name="netWorth" 
-                 value={this.state.netWorth} 
-                 onChange={this.update}/><br/>
-          <label>Salary</label>
-          <input name="salary" 
-                 value={this.state.salary} 
-                 onChange={this.update}/><br/>
-          <label>Age</label>
-          <input name="age" 
-                 value={this.state.age} 
-                 onChange={this.update}/><br/>
-        </form>
-      </fieldset>
+      <form id="worth">
+        <fieldset>
+          <legend>Profile</legend>
+          {attribs}
+        </fieldset>
+      </form>
     );
   }
 }

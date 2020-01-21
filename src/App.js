@@ -16,8 +16,6 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <Compound/>
-
       <Profile/>
     </div>
   );
