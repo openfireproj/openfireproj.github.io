@@ -74,6 +74,8 @@ export class Equation extends React.Component {
     return params;
   }            
 
+  description() { }
+
   render() {
     const state = this.state;
 
@@ -89,12 +91,13 @@ export class Equation extends React.Component {
              onChange={this.update} />
       )
     }
-                 
+
     return (
       <div>
         <form id={this.formName} name={this.formName}> 
           <fieldset>
             <legend>{this.formName}</legend>
+            <p>{this.description()}</p>
             {attribs}
             <LineGraph args={this.graphArgs(state)} eqn={state.eqn}/>
           </fieldset>
