@@ -1,4 +1,15 @@
-const compoundInterestWithMonthlyContributions = 
+export const compoundMaturity = (
+  principal,
+  interestRate,
+  periods
+) => {
+  // compoundsPerYear
+
+  return principal * Math.exp(interestRate*periods);
+
+}
+
+export const compoundInterestWithMonthlyContributions = 
 (
   principal,
   monthlyContributions,
@@ -18,5 +29,3 @@ const compoundInterestWithMonthlyContributions =
       totalInterest: ((((principalAfterInterest-principal)+(contributationsAfterInterest-totalContrubutions))/futureValue)*100)
     }
 };
-
-console.log(compoundInterestWithMonthlyContributions(10000, 100, 5, 12, 10));
