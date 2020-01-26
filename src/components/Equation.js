@@ -6,14 +6,20 @@ import LineGraph from '../graphs/line';
 
 let storage = require('local-storage');
 
+function formFieldName(formName, name) {
+  return formName + '_' + name
+}
+
 /*
 if in storage look up value, else return value
 */
 export function formGet(name, form) {
+  const fqName = formFieldName(form.name, name);
+
   if (false) {
     return storage.get('state')[name];
   } else {
-    let value = form[name].value;
+    let value = form[fqName].value;
 
     if (value === '') {
       return value;
@@ -24,7 +30,7 @@ export function formGet(name, form) {
       return "blank"
 
     } else {
-      return parseFloat(form[name].value);
+      return parseFloat(form[fqName].value);
     }
   }
 }
@@ -35,35 +41,62 @@ export class Equation extends React.Component {
 
     this.state = this.loadEqn()
     this.update = this.update.bind(this);
-    this.formName = 'endurance'
   }
 
   update() {
-    var form = document.getElementById(this.formName);
+    const form = document.getElementById(this.formName);
     this.setState(state => (this.updateEqn(form)));
   }
 
+  /**
+    args 
+
+    override this method if you'd like to change the
+    values or order of values which will be passed to 
+    graphing. you may be able to reorder your state list,
+    and leave this as is. 
+
+    @param state The Equation's Parameter state
+
+    @returns Array (likely referencing state values.)
+
+    e.g.
+    ```
+    graphArgs(state) {
+        return [state.principal, state.interestRate];
+    }
+    ```
+  */
+  graphArgs(state) {
+    let params = Object.entries(state)
+                       .filter(kv => kv[0] !== 'eqn')
+                       .map(kv => state[kv[0]])
+    return params;
+  }            
+
   render() {
     const state = this.state;
-    const args = [state.principal, state.burnRate]
 
     const attribs = []
     for (const key in state) {
-      if (key == 'eqn') { continue; }
+      if (key === 'eqn') { continue; }
+      const fqKey = formFieldName(this.formName, key);
+
       attribs.push(
-        <TextField id={key} label={key} key={key}
+        <TextField id={fqKey} label={key} key={key}
                 value={state[key]} 
               variant="outlined" 
              onChange={this.update} />
       )
     }
-
+                 
     return (
       <div>
-        <form id="endurance" name="endurance"> 
-          <fieldset> <legend>Endurance</legend>
+        <form id={this.formName} name={this.formName}> 
+          <fieldset>
+            <legend>{this.formName}</legend>
             {attribs}
-            <LineGraph args={args} eqn={state.eqn}/>
+            <LineGraph args={this.graphArgs(state)} eqn={state.eqn}/>
           </fieldset>
         </form>
       </div>

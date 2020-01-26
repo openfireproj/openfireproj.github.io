@@ -6,10 +6,11 @@ import eqn from '../equations/endurance';
 
 export class Endurance extends Equation {
   loadEqn() {
+    this.formName = "Endurance" //TODO get from classname?
     var _ = {
-       'eqn': eqn.remaining,
-       'principal':  Profile.getS('netWorth'),
-       'burnRate': Profile.getS('burnRate')
+       eqn: eqn.remaining,
+       principal:  Profile.getS('netWorth'),
+       burnRate: Profile.getS('burnRate')
     }
 
     return _
@@ -17,9 +18,9 @@ export class Endurance extends Equation {
 
   updateEqn(form) {
     var _ = {
-       'eqn': eqn.remaining,
-       'principal': formGet('principal', form),
-       'burnRate': formGet('burnRate', form)
+       eqn: eqn.remaining,
+       principal: formGet('principal', form),
+       burnRate: formGet('burnRate', form)
     }
     _['endurance'] = eqn.endurance(_.principal, _.burnRate);
 
