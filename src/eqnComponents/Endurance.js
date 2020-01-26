@@ -27,6 +27,10 @@ export class Endurance extends Equation {
     return _
   }
 
+  description() {
+      return "Expense of principle. ";
+  }
+
 }
 
 export default Endurance;
