@@ -39,7 +39,6 @@ export class Equation extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = this.loadEqn()
     this.update = this.update.bind(this);
   }
 
@@ -81,7 +80,6 @@ export class Equation extends React.Component {
 
     const attribs = []
     for (const key in state) {
-      if (key === 'eqn') { continue; }
       const fqKey = formFieldName(this.formName, key);
 
       attribs.push(
@@ -99,7 +97,7 @@ export class Equation extends React.Component {
             <legend>{this.formName}</legend>
             <p>{this.description()}</p>
             {attribs}
-            <LineGraph args={this.graphArgs(state)} eqn={state.eqn}/>
+            <LineGraph args={this.graphArgs(state)} eqn={this.eqn}/>
           </fieldset>
         </form>
       </div>

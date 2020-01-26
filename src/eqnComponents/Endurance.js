@@ -5,20 +5,15 @@ import eqn from '../equations/endurance';
 
 
 export class Endurance extends Equation {
-  loadEqn() {
-    this.formName = "Endurance" //TODO get from classname?
-    var _ = {
-       eqn: eqn.remaining,
-       principal:  Profile.getS('netWorth'),
-       burnRate: Profile.getS('burnRate')
-    }
-
-    return _
+  formName = "Endurance" //TODO get from classname?
+  eqn = eqn.remaining;
+  state = {
+    principal:  Profile.getS('netWorth'),
+    burnRate: Profile.getS('burnRate')
   }
 
   updateEqn(form) {
     var _ = {
-       eqn: eqn.remaining,
        principal: formGet('principal', form),
        burnRate: formGet('burnRate', form)
     }
