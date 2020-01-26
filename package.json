@@ -17,7 +17,12 @@
     "decimal.js": "^10.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "local-storage": "^2.0.0",
+    "financejs": "^4.1.0",
+    "chartist": "0.11.4",
+    "react-chartist": "0.14.2",
+    "numeral": "2.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
