@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 import {ProfileComponent} from './Profile';
 import Welcome from './Welcome';
+import Endurance from './eqnComponents/Endurance';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Demo />
       <Welcome/>
       <ProfileComponent/>
+      <Endurance/>
     </div>
   );
 }
