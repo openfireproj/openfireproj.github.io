@@ -2,10 +2,12 @@ import React from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 
+import Demo from './pages/Demo';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import Demo from './pages/Demo';
+import {ProfileComponent} from './Profile';
+import Welcome from './Welcome';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         </Toolbar>
       </AppBar>
       <Demo />
+      <Welcome/>
+      <ProfileComponent/>
     </div>
   );
 }
