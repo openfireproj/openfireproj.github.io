@@ -1,5 +1,5 @@
-import { Equation, formGet } from '../components/Equation';
-import {compoundMaturity} from '../equations/compound-interest';
+import { Equation, formGet } from '../../components/Equation';
+import {compoundMaturity} from '../../equations/compound-interest';
 
 
 export class CompoundMaturity extends Equation {

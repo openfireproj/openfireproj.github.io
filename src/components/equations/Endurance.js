@@ -1,7 +1,7 @@
-import { Profile } from '../Profile';
-import { Equation, formGet } from '../components/Equation';
+import { Profile } from '../../Profile';
+import { Equation, formGet } from '../../components/Equation';
 
-import eqn from '../equations/endurance';
+import eqn from '../../equations/endurance';
 
 
 export class Endurance extends Equation {

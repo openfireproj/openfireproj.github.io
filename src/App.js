@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 
 import {ProfileComponent} from './Profile';
 import Welcome from './Welcome';
-import Endurance from './eqnComponents/Endurance';
-import {CompoundMaturity} from './eqnComponents/Compound';
+import Endurance from './components/equations/Endurance';
+import {CompoundMaturity} from './components/equations/Compound';
 
 function App() {
   return (
