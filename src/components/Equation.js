@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
-import Money from '../components/inputs/Money';
 import LineGraph from '../graphs/line';
 
 
@@ -68,7 +67,7 @@ export class Equation extends React.Component {
   */
   graphArgs(state) {
     let params = Object.entries(state)
-                       .filter(kv => kv[0] !== 'eqn')
+                       .filter(kv => !['eqn'].includes(kv[0]))
                        .map(kv => state[kv[0]])
     return params;
   }            
@@ -77,6 +76,7 @@ export class Equation extends React.Component {
 
   render() {
     const state = this.state;
+    let widgets;
 
     const attribs = []
     for (const key in state) {
@@ -90,6 +90,12 @@ export class Equation extends React.Component {
       )
     }
 
+    if (this.graph) {
+      widgets = (
+        <LineGraph args={this.graphArgs(state)} eqn={this.eqn}/>
+      )
+    }
+
     return (
       <div>
         <form id={this.formName} name={this.formName}> 
@@ -97,7 +103,7 @@ export class Equation extends React.Component {
             <legend>{this.formName}</legend>
             <p>{this.description()}</p>
             {attribs}
-            <LineGraph args={this.graphArgs(state)} eqn={this.eqn}/>
+            {widgets}
           </fieldset>
         </form>
       </div>
