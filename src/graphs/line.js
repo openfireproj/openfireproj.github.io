@@ -34,7 +34,7 @@ export class LineGraph extends React.Component {
     };
 
     return (
-      <ChartistGraph data={data} options={options} type={type} />
+      <ChartistGraph key={Date.now()} data={data} options={options} type={type} />
     )
   }
 }
