@@ -35,6 +35,8 @@ export function formGet(name, form) {
 }
 
 export class Equation extends React.Component {  
+  formName = this.constructor.name
+
   handleChange = (key, event) => {
     let val = event.target.value;
     if (key === "principal") {
@@ -42,8 +44,19 @@ export class Equation extends React.Component {
     } else if (key === "interestRate") {
       val = parseFloat(val);
     }
-    this.setState({[key]: val});
+
+    this.setState((state,props) => {
+        state[key] = val
+        return this.updateEqn(state);
+    })
   };
+
+  /*
+    override this method if you wish to add additonal calculated fields onto the equation.
+
+    see `Endurance` for an example.
+  */
+  updateEqn(_) { return _ }
 
   /**
     args 
