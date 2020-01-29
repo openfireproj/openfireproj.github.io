@@ -34,17 +34,16 @@ export function formGet(name, form) {
   }
 }
 
-export class Equation extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.update = this.update.bind(this);
-  }
-
-  update() {
-    const form = document.getElementById(this.formName);
-    this.setState(state => (this.updateEqn(form)));
-  }
+export class Equation extends React.Component {  
+  handleChange = (key, event) => {
+    let val = event.target.value;
+    if (key === "principal") {
+      val = parseInt(val, 10);
+    } else if (key === "interestRate") {
+      val = parseFloat(val);
+    }
+    this.setState({[key]: val});
+  };
 
   /**
     args 
@@ -83,10 +82,14 @@ export class Equation extends React.Component {
       const fqKey = formFieldName(this.formName, key);
 
       attribs.push(
-        <TextField id={fqKey} label={key} key={key}
-                value={state[key]} 
-              variant="outlined" 
-             onChange={this.update} />
+        <TextField
+          id={fqKey}
+          label={key}
+          key={key}
+          value={state[key]} 
+          variant="outlined" 
+          onChange={event => this.handleChange(key, event)}
+        />
       )
     }
 
