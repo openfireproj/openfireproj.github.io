@@ -11,7 +11,10 @@ export let Profile = {
   },
 
   getS: (key) => {
-      return parseFloat(storage.get('state')[key])
+    if (storage.get('state')) {
+      return parseFloat(storage.get('state')[key]);
+    }
+    return undefined;
   },
 
   set: (key, value) => {
