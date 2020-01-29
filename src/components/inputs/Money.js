@@ -1,29 +1,31 @@
 import React from 'react';
-import numeral from 'numeral';
-
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 
 export default class MoneyInput extends React.Component {        
-    handleChange = event => {
+    handleChange = (event, value) => {
         const { fieldKey, onChange } = this.props;
-        let val = event.target.value;
-        // strip out any non-numerals
-        val = val.replace(/\D+/g, '');
-        onChange(fieldKey, val);
+        try {
+            onChange(fieldKey, parseFloat(value));
+        } catch {
+            console.warn(`${fieldKey} - invalid input: ${value}`);
+        }
+        
     }
     render() {
-        const { currencySymbol = "$", label, value } = this.props;
+        const { currencySymbol, label, value } = this.props;
         const inputId = `money-input-${label}`;
         return (
             <div>
-                <InputLabel htmlFor={inputId}>{label}</InputLabel>
-                <Input
+                <CurrencyTextField
                     id={inputId}
-                    value={numeral(value).format("0,0")}
+                    label="Amount"
+                    variant="standard"
+                    value={value.toString()}
+                    currencySymbol={currencySymbol}
+                    outputFormat="string"
+                    decimalCharacter="."
+                    digitGroupSeparator=","
                     onChange={this.handleChange}
-                    startAdornment={<InputAdornment position="start">{currencySymbol}</InputAdornment>}
                 />
             </div>
         );

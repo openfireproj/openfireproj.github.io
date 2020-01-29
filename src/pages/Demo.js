@@ -6,7 +6,7 @@ export default class Demo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      money: 200
+      money: 200.00
     };
   }
 
