@@ -1,9 +1,8 @@
-import { Equation, formGet } from '../../components/Equation';
+import { Equation } from '../../components/Equation';
 import {compoundMaturity} from '../../equations/compound-interest';
 
 
 export class CompoundMaturity extends Equation {
-  formName = 'CompoundMaturity'
   graph = 'line'
   eqn = compoundMaturity;
   state = {
@@ -11,10 +10,4 @@ export class CompoundMaturity extends Equation {
     interestRate: 0.5,
   }
 
-  updateEqn(form) {
-    return {
-       principal: formGet('principal', form),
-       interestRate: formGet('interestRate', form)
-    }
-  }
 }
