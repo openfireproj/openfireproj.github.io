@@ -2,7 +2,8 @@ import React from 'react';
 import ChartistGraph from 'react-chartist';
 
 function numToLabel(value) {
-    return value.toString().length > 5 ? (value * 0.001).toString + 'k' : value
+    return value.toString().length > 5 ? 
+        (value * 0.001).toString + 'k' : value
 }
 
 export class LineGraph extends React.Component {

@@ -5,16 +5,20 @@ import { TextField } from '@material-ui/core';
 let storage = require('local-storage');
 
 export let Profile = {
-  // Sorry
-  get: (key) => {
-    return storage.get(key);
-  },
-
-  getS: (key) => {
-    if (storage.get('state')) {
-      return parseFloat(storage.get('state')[key]);
+  profile: (key) => {
+    if (storage.get('profile')) {
+      return parseFloat(storage.get('profile')[key]);
     }
     return undefined;
+  },
+  profileSet: (key, value) => {
+    let profile = Profile.all()
+    profile[key] = value
+    storage.set('profile', profile)
+  },
+
+  get: (key) => {
+    return storage.get(key);
   },
 
   set: (key, value) => {
@@ -22,48 +26,55 @@ export let Profile = {
   },
 
   all: () => {
-    let state = storage.get('state');
+    let profile = storage.get('profile');
+    if ( profile === null ) {
+        profile = {
+          netWorth: 0.0,
+          burnRate: 0.0,
+          salary: 0,
+          age: 0
+        }
+    }
 
-    return state;
+    return profile;
+  },
+
+  defaults: {
+    netWorth: 0.0,
+    burnRate: 0.0,
+    salary: 0,
+    age: 25
   }
+
 }
 
 export class ProfileComponent extends React.Component {
   constructor(props) {
     super(props);
-    var default_ = {
-        netWorth: 0.0,
-        burnRate: 0.0,
-        salary: 0,
-        age: 0
-    }
-    var stored = Profile.get('state');
 
-    this.state = stored ? stored : default_;
-    this.update = this.update.bind(this);
+    this.state = Profile.all()
   }
 
-  update() {
-    var profile = document.getElementById('profile');
-    var newState = {
-      netWorth: profile.netWorth.value,
-      burnRate: profile.burnRate.value,
-      salary: profile.salary.value,
-      age: profile.age.value
-    };
+  handleChange = (key, event) => {
+    let val = parseFloat(event.target.value);
+    // probably should union state and profile here,
+    // in case there was an update somewhere else?
 
-    this.setState(state => (newState));
-    Profile.set('state', newState);
-  }
+    this.setState((state,props) => {
+      state[key] = val
+      Profile.profileSet(key, val)
+      return state
+    })
+  };
 
   render() {
     const attribs = []
-    for (const key in Profile.all()) {
+    for (const key in this.state) {
       attribs.push(
         <TextField id={key} label={key} key={key}
-                value={Profile.all()[key]} 
               variant="outlined" 
-             onChange={this.update} />
+              value={this.state[key]}
+             onChange={event => this.handleChange(key, event)} />
       )
     }
 
