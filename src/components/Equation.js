@@ -3,47 +3,15 @@ import { TextField } from '@material-ui/core';
 import LineGraph from '../graphs/line';
 
 
-let storage = require('local-storage');
-
 function formFieldName(formName, name) {
   return formName + '_' + name
-}
-
-/*
-if in storage look up value, else return value
-*/
-export function formGet(name, form) {
-  const fqName = formFieldName(form.name, name);
-
-  if (false) {
-    return storage.get('state')[name];
-  } else {
-    let value = form[fqName].value;
-
-    if (value === '') {
-      return value;
-    } else if (value.match(/a-zA-Z_/)) {
-      //if (value in storage.get('state')) {
-
-      //}
-      return "blank"
-
-    } else {
-      return parseFloat(form[fqName].value);
-    }
-  }
 }
 
 export class Equation extends React.Component {  
   formName = this.constructor.name
 
   handleChange = (key, event) => {
-    let val = event.target.value;
-    if (key === "principal") {
-      val = parseInt(val, 10);
-    } else if (key === "interestRate") {
-      val = parseFloat(val);
-    }
+    let val = parseFloat(event.target.value);
 
     this.setState((state,props) => {
         state[key] = val
@@ -52,7 +20,8 @@ export class Equation extends React.Component {
   };
 
   /*
-    override this method if you wish to add additonal calculated fields onto the equation.
+    override this method if you wish to add additonal 
+    calculated fields onto the equation.
 
     see `Endurance` for an example.
   */
@@ -79,7 +48,6 @@ export class Equation extends React.Component {
   */
   graphArgs(state) {
     let params = Object.entries(state)
-                       .filter(kv => !['eqn'].includes(kv[0]))
                        .map(kv => state[kv[0]])
     return params;
   }            
