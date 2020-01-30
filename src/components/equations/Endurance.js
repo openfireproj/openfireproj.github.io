@@ -6,8 +6,8 @@ import eqn from '../../equations/endurance';
 
 export class Endurance extends Equation {
   state = {
-    principal:  Profile.getS('netWorth'),
-    burnRate: Profile.getS('burnRate')
+    principal:  Profile.profile('netWorth'),
+    burnRate: Profile.profile('burnRate')
   }
   eqn = eqn.remaining;
 
