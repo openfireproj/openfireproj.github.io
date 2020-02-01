@@ -2,6 +2,7 @@ import React from 'react';
 import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 
 export default class MoneyInput extends React.Component {        
+    // TODO calculated fields don't update 
     handleChange = (event, value) => {
         const { fieldKey, onChange } = this.props;
         try {
@@ -12,22 +13,22 @@ export default class MoneyInput extends React.Component {
         
     }
     render() {
+        // TODO what if the user hasn't filled in a value yet?
+        // NaN, object, html garbage
         const { currencySymbol, label, value } = this.props;
         const inputId = `money-input-${label}`;
         return (
-            <div>
-                <CurrencyTextField
-                    id={inputId}
-                    label="Amount"
-                    variant="standard"
-                    value={value.toString()}
-                    currencySymbol={currencySymbol}
-                    outputFormat="string"
-                    decimalCharacter="."
-                    digitGroupSeparator=","
-                    onChange={this.handleChange}
-                />
-            </div>
+            <CurrencyTextField
+                id={inputId}
+                label={label}
+                variant="standard"
+                value={value}
+                currencySymbol={currencySymbol}
+                outputFormat="string"
+                decimalCharacter="."
+                digitGroupSeparator=","
+                onChange={this.handleChange}
+            />
         );
     }
 }

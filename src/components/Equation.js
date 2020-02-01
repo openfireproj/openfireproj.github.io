@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
 import LineGraph from '../graphs/line';
+import MoneyInput from '../components/inputs/Money';
 
 
 function formFieldName(formName, name) {
@@ -10,12 +10,18 @@ function formFieldName(formName, name) {
 export class Equation extends React.Component {  
   formName = this.constructor.name
 
-  handleChange = (key, event) => {
-    let val = parseFloat(event.target.value);
+  handleChange = (key, value) => {
+    let val = parseFloat(value);
 
-    this.setState((state,props) => {
+    this.setState((state, props) => {
         state[key] = val
-        return this.updateEqn(state);
+        try {
+            return this.updateEqn(state);
+        } catch {
+            console.log('Exception calculating in ' + this.formName)
+            console.log(state)
+        }
+        return state
     })
   };
 
@@ -63,14 +69,12 @@ export class Equation extends React.Component {
       const fqKey = formFieldName(this.formName, key);
 
       attribs.push(
-        <TextField
-          id={fqKey}
-          label={key}
-          key={key}
-          value={state[key]} 
-          variant="outlined" 
-          onChange={event => this.handleChange(key, event)}
-        />
+        <MoneyInput id={fqKey} 
+            label={key}
+            key={key}
+            fieldKey={key}
+            value={this.state[key]}
+            onChange={this.handleChange} />
       )
     }
 

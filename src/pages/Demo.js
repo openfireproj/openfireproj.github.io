@@ -20,6 +20,7 @@ export default class Demo extends React.Component {
       <div>
         <MoneyInput
           currencySymbol="$"
+          label="Amount"
           fieldKey="money"
           onChange={this.onChange}
           value={money}

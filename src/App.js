@@ -2,11 +2,10 @@ import React from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 
-import Demo from './pages/Demo';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import {ProfileComponent} from './Profile';
+import {ProfileComponent} from './components/ProfileComponent';
 import Welcome from './Welcome';
 import Endurance from './components/equations/Endurance';
 import {CompoundMaturity} from './components/equations/Compound';
@@ -19,10 +18,9 @@ function App() {
           <Typography variant="h6">Open Fire</Typography>
         </Toolbar>
       </AppBar>
-      <Demo />
       <Welcome/>
-      <ProfileComponent/>
       <Endurance/>
+      <ProfileComponent/>
       <CompoundMaturity/>
     </div>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
 
+// getting rid of numerical commas
+// for easy to read numbers.
 function numLabel(value) {
     let magnitudes = ' kMBT????'
     value = value.toString()
@@ -11,11 +13,9 @@ function numLabel(value) {
         zeros += 1
     }
 
-    // getting rid of digit commas
     zeros = zeros - (zeros % 3) 
     let magnitude = magnitudes[zeros/3]
 
-    console.log(value, value.substring(0, length-zeros) + magnitude)
     return value.substring(0, length-zeros) + magnitude
 }
 
