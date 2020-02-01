@@ -9,8 +9,8 @@ class Welcome extends React.Component {
         by community updates. 
         </p>
         <p>
-        Start with filling out <a href="#">profile details</a>, or 
-        calculate your <a href="#">endurance</a>.
+        Start with filling out <i>profile details</i>, or 
+        calculate your <i>endurance</i>.
         </p>
       </div>
     )
