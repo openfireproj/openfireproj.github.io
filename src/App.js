@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import {ProfileComponent} from './Profile';
+import {ProfileComponent} from './components/ProfileComponent';
 import Welcome from './Welcome';
 import Endurance from './components/equations/Endurance';
 import {CompoundMaturity} from './components/equations/Compound';
@@ -19,8 +19,8 @@ function App() {
         </Toolbar>
       </AppBar>
       <Welcome/>
-      <ProfileComponent/>
       <Endurance/>
+      <ProfileComponent/>
       <CompoundMaturity/>
     </div>
   );
