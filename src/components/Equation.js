@@ -12,17 +12,7 @@ export class Equation extends React.Component {
 
   handleChange = (key, value) => {
     let val = parseFloat(value);
-
-    this.setState((state, props) => {
-        state[key] = val
-        try {
-            return this.updateEqn(state);
-        } catch {
-            console.log('Exception calculating in ' + this.formName)
-            console.log(state)
-        }
-        return state
-    })
+    this.setState({ [key]: val }, this.updateEqn)
   };
 
   /*
@@ -65,17 +55,28 @@ export class Equation extends React.Component {
     let widgets;
 
     const attribs = []
-    for (const key in state) {
+    for (const key of Object.keys(state)) {
       const fqKey = formFieldName(this.formName, key);
 
-      attribs.push(
-        <MoneyInput id={fqKey} 
+      if (key === "endurance") {
+        attribs.push(
+          <input
+            type="text"
+            value={this.state[key]}
+          />
+        )
+      } else {
+        attribs.push(
+          <MoneyInput
+            id={fqKey} 
             label={key}
             key={key}
             fieldKey={key}
             value={this.state[key]}
-            onChange={this.handleChange} />
-      )
+            onChange={this.handleChange}
+          />
+        )
+      }
     }
 
     if (this.graph) {
