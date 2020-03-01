@@ -5,15 +5,26 @@ import eqn from '../../equations/endurance';
 
 
 export class Endurance extends Equation {
-  state = {
-    principal: Profile['netWorth'] || 100000,
-    burnRate:  Profile['burnRate'] || 10
+  constructor(props) {
+    super(props);
+    this.state = {
+      principal: Profile['netWorth'] || 100000,
+      burnRate:  Profile['burnRate'] || 10,
+    }
+    this.eqn = eqn.remaining;
   }
-  eqn = eqn.remaining;
+  
+  componentDidMount() {
+    this.updateEqn()
+  }
 
-  updateEqn(_) {
-    _['endurance'] = eqn.endurance(_.principal, _.burnRate);
-    return _
+  updateEqn() {
+    this.setState({
+      endurance: eqn.endurance(
+        this.state.principal,
+        this.state.burnRate
+      )
+    }, () => console.log(this.state))
   }
 
   description() {
