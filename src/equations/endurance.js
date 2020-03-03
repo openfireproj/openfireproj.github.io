@@ -1,5 +1,5 @@
 export default class Config {
-  static name = "Endurance"
+  static title = "Endurance"
   static description = "How long will your money last"
   static params = [
     {
@@ -13,7 +13,7 @@ export default class Config {
     {
       name: "burnAmount",
       label: "Burn Amount",
-      default: 8300
+      default: 8300,
       type: "currency",
       min: 0,
       max: Number.POSITIVE_INFINITY,      
@@ -37,6 +37,6 @@ export default class Config {
   static equation = (principal, burnAmount, totalInterest, deposits) => {
     totalInterest = 0.0;
     deposits = 0.0;
-    return (principal+totalInterest+deposits)/spendRate;
+    return (principal+totalInterest+deposits)/burnAmount;
   }
 }
