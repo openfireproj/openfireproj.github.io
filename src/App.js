@@ -5,7 +5,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import Demo from './pages/Demo';
+import {ProfileComponent} from './components/ProfileComponent';
+import Welcome from './Welcome';
+
+import Equation from './components/Equation';
+
+import Endurance from './equations/endurance';
 
 function App() {
   return (
@@ -15,7 +20,9 @@ function App() {
           <Typography variant="h6">Open Fire</Typography>
         </Toolbar>
       </AppBar>
-      <Demo />
+      <Welcome/>
+      <Equation config={Endurance} />
+      <ProfileComponent/>
     </div>
   );
 }
