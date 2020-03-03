@@ -20,7 +20,7 @@ export class Endurance extends Equation {
 
   updateEqn() {
     this.setState({
-      endurance: eqn.endurance(
+      endurance: eqn.equation(
         this.state.principal,
         this.state.burnRate
       )
