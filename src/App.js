@@ -7,8 +7,10 @@ import Typography from '@material-ui/core/Typography';
 
 import {ProfileComponent} from './components/ProfileComponent';
 import Welcome from './Welcome';
-import Endurance from './components/equations/Endurance';
-import {CompoundMaturity} from './components/equations/Compound';
+
+import Equation from './components/Equation';
+
+import Endurance from './equations/endurance';
 
 function App() {
   return (
@@ -19,9 +21,8 @@ function App() {
         </Toolbar>
       </AppBar>
       <Welcome/>
-      <Endurance/>
+      <Equation config={Endurance} />
       <ProfileComponent/>
-      <CompoundMaturity/>
     </div>
   );
 }

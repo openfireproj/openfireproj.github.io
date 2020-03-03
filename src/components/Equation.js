@@ -1,87 +1,72 @@
 import React from 'react';
 import LineGraph from '../graphs/line';
 import MoneyInput from '../components/inputs/Money';
+import TextField from '@material-ui/core/TextField';
 
+export default class Equation extends React.Component {  
+  constructor(props) {
+    super(props);
+    // init state based on param configuration
+    this.state = {};
+    for (const [param, paramConfig] of Object.entries(props.config.params)) {
+      this.state[param] = paramConfig.default;
+    }
+  }
 
-function formFieldName(formName, name) {
-  return formName + '_' + name
-}
+  componentDidMount() {
+    this.executeEquation();
+  }
 
-export class Equation extends React.Component {  
-  formName = this.constructor.name
+  executeEquation() {
+    const { config } = this.props;
+    let args = {};
+    for (const param of Object.keys(config.params)) {
+      args[param] = this.state[param];
+    }
+    this.setState({ result: config.equation(args) });
+  }
 
   handleChange = (key, value) => {
-    let val = parseFloat(value);
-    this.setState({ [key]: val }, this.updateEqn)
+    this.setState({ [key]: value }, this.executeEquation)
   };
 
-  /*
-    override this method if you wish to add additonal 
-    calculated fields onto the equation.
-
-    see `Endurance` for an example.
-  */
-  updateEqn(_) { return _ }
-
-  /**
-    args 
-
-    override this method if you'd like to change the
-    values or order of values which will be passed to 
-    graphing. you may be able to reorder your state list,
-    and leave this as is. 
-
-    @param state The Equation's Parameter state
-
-    @returns Array (likely referencing state values.)
-
-    e.g.
-    ```
-    graphArgs(state) {
-        return [state.principal, state.interestRate];
-    }
-    ```
-  */
-  graphArgs(state) {
-    let params = Object.entries(state)
-                       .map(kv => state[kv[0]])
-    return params;
-  }            
-
-  description() { }
+  graphArgs() {
+    return Object.entries(this.state).map(kv => this.state[kv[0]]);
+  }
 
   render() {
-    const state = this.state;
-    let widgets;
-
-    const attribs = []
-    for (const key of Object.keys(state)) {
-      const fqKey = formFieldName(this.formName, key);
-
-      if (key === "endurance") {
-        attribs.push(
-          <input
-            type="text"
-            value={this.state[key]}
-          />
-        )
-      } else {
+    const { config } = this.props;
+    let widgets = [];
+    let attribs = []
+    
+    for (const [param, paramConfig] of Object.entries(config.params)) {
+      if (paramConfig.type === "currency") {
         attribs.push(
           <MoneyInput
-            id={fqKey} 
-            label={key}
-            key={key}
-            fieldKey={key}
-            value={this.state[key]}
+            id={param} 
+            label={paramConfig.label}
+            key={param}
+            fieldKey={param}
+            value={this.state[param]}
             onChange={this.handleChange}
           />
-        )
+        );
       }
     }
+    attribs.push(
+      <TextField
+        disabled={true}
+        inputProps={{
+          style: { textAlign: "right" }
+        }}
+        label={config.result.label}
+        value={this.state.result}
+      />
+    )
 
     if (this.graph) {
-      widgets = (
-        <LineGraph args={this.graphArgs(state)} eqn={this.eqn}/>
+      widgets.push(
+        <LineGraph args={this.graphArgs()} eqn={this.eqn}/>
       )
     }
 
@@ -90,7 +75,7 @@ export class Equation extends React.Component {
         <form id={this.formName} name={this.formName}> 
           <fieldset>
             <legend>{this.formName}</legend>
-            <p>{this.description()}</p>
+            <p>{config.description}</p>
             {attribs}
             {widgets}
           </fieldset>
