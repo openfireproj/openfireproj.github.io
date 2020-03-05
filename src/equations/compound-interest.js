@@ -1,12 +1,37 @@
-export const compoundMaturity = (
-  principal,
-  interestRate,
-  periods
-) => {
-  // compoundsPerYear
+const pow = Math.pow
+const exp = Math.exp
 
-  return principal * Math.exp(interestRate*periods);
+export default class Config {
+  static title = "Compound Interest"
+  static description = "Standard PeRT Equation."
 
+  static params = {
+    principal: {
+      label: "Principal",
+      default: 1000,
+      type: "currency",
+      min: 0,
+      max: Number.POSITIVE_INFINITY,      
+    },
+    periods: {
+      label: "Periods",
+      default: 10,
+      type: "currency",
+    },
+    rate: {
+      label: "Interest Rate (Annual)",
+      default: 0.029,
+      type: "currency",
+    }
+  }
+  static result = {
+    name: 'result',
+    label: "Payment",
+    type: "currency",
+  }
+  static equation =  ({principal, rate, periods} = {}) => {
+      return principal * exp(rate*periods);
+  }
 }
 
 export const compoundInterestWithMonthlyContributions = 
@@ -18,8 +43,8 @@ export const compoundInterestWithMonthlyContributions =
   numberOfYears
   ) => {
     const totalContrubutions = monthlyContributions * numberOfYears * 12;
-    const principalAfterInterest = principal * Math.pow(1+((annualInterestRate/100)/compoundsPerYear),compoundsPerYear*numberOfYears);
-    const contributationsAfterInterest = monthlyContributions*((Math.pow((1+((annualInterestRate/100)/compoundsPerYear)),(compoundsPerYear*numberOfYears))-1)/((annualInterestRate/100)/compoundsPerYear));
+    const principalAfterInterest = principal * pow(1+((annualInterestRate/100)/compoundsPerYear),compoundsPerYear*numberOfYears);
+    const contributationsAfterInterest = monthlyContributions*((pow((1+((annualInterestRate/100)/compoundsPerYear)),(compoundsPerYear*numberOfYears))-1)/((annualInterestRate/100)/compoundsPerYear));
     const futureValue = principalAfterInterest + contributationsAfterInterest;
     return {
       futureValue,
