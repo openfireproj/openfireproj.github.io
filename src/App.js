@@ -11,6 +11,7 @@ import Welcome from './Welcome';
 import Equation from './components/Equation';
 
 import Endurance from './equations/endurance';
+import Monthly from './equations/com.mtgprofessor/monthly';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       </AppBar>
       <Welcome/>
       <Equation config={Endurance} />
+      <Equation config={Monthly} />
       <ProfileComponent/>
     </div>
   );
