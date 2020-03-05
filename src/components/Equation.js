@@ -2,13 +2,15 @@ import React from 'react';
 import LineGraph from '../graphs/line';
 import MoneyInput from '../components/inputs/Money';
 import TextField from '@material-ui/core/TextField';
+import ParamConfig from '../components/ParamConfig';
 
 export default class Equation extends React.Component {  
   constructor(props) {
     super(props);
+    const params = ParamConfig.getConfig(props.config.params)
     // init state based on param configuration
     this.state = {};
-    for (const [param, paramConfig] of Object.entries(props.config.params)) {
+    for (const [param, paramConfig] of Object.entries(params)) {
       this.state[param] = paramConfig.default;
     }
   }
@@ -19,8 +21,9 @@ export default class Equation extends React.Component {
 
   executeEquation() {
     const { config } = this.props;
+    const params = ParamConfig.getConfig(config.params)
     let args = {};
-    for (const param of Object.keys(config.params)) {
+    for (const param of Object.keys(params)) {
       args[param] = this.state[param];
     }
     this.setState({ result: config.equation(args) });
@@ -36,10 +39,11 @@ export default class Equation extends React.Component {
 
   render() {
     const { config } = this.props;
+    const params = ParamConfig.getConfig(config.params)
     let widgets = [];
     let attribs = []
     
-    for (const [param, paramConfig] of Object.entries(config.params)) {
+    for (const [param, paramConfig] of Object.entries(params)) {
       if (paramConfig.type === "currency") {
         attribs.push(
           <MoneyInput
