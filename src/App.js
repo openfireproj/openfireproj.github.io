@@ -11,7 +11,7 @@ import Welcome from './Welcome';
 import Equation from './components/Equation';
 
 import Endurance from './equations/endurance';
-import Monthly from './equations/com.mtgprofessor/monthly';
+import Monthly from './equations/com.mtgprofessor/monthly-payment';
 
 function App() {
   return (
