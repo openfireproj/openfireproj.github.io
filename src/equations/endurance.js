@@ -1,4 +1,5 @@
 export default class Config {
+  static id = "endurance"
   static title = "Endurance"
   static description = "How long will your money last"
   static params = {
@@ -18,7 +19,7 @@ export default class Config {
     },
     burnPeriod: {
       label: "Burn Period",
-      default: "month",
+      default: 30,
       type: "select",
       options: {
         "month": 30,

@@ -58,8 +58,9 @@ export default class Equation extends React.Component {
         disabled={true}
         inputProps={{
           style: { textAlign: "right" }
-        }}
+        }}        
         label={config.result.label}
+        key="result"
         value={this.state.result}
       />
     )
@@ -71,10 +72,10 @@ export default class Equation extends React.Component {
     }
 
     return (
-      <div>
-        <form id={this.formName} name={this.formName}> 
+      <div id={`${config.id}-equation`}>
+        <form id={config.id} name={config.id}> 
           <fieldset>
-            <legend>{this.formName}</legend>
+            <legend>{config.id}</legend>
             <p>{config.description}</p>
             {attribs}
             {widgets}
