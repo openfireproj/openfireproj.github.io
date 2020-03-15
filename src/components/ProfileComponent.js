@@ -1,6 +1,6 @@
 import React from 'react';
 import {Profile} from '../Profile';
-import MoneyInput from '../components/inputs/Money';
+import MoneyInput from '../components/fields/Money';
 
 export class ProfileComponent extends React.Component {
   constructor(props) {
