@@ -1,6 +1,7 @@
 import React from 'react';
 import LineGraph from '../graphs/line';
 import MoneyInput from '../components/inputs/Money';
+import SelectInput from '../components/inputs/Select';
 import TextField from '@material-ui/core/TextField';
 
 export default class Equation extends React.Component {  
@@ -51,6 +52,18 @@ export default class Equation extends React.Component {
             onChange={this.handleChange}
           />
         );
+      } else if (paramConfig.type === "select") {
+        attribs.push(
+          <SelectInput
+            id={param}
+            label={paramConfig.label}
+            key={param}
+            fieldKey={param}
+            options={paramConfig.options}
+            value={this.state[param]}    
+            onChange={this.handleChange}
+          />
+        )
       }
     }
     attribs.push(
