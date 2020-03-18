@@ -32,9 +32,12 @@ export default class Config {
     label: "Years Before Broke",
     type: "text"
   }
-  static equation = ({principal, burnAmount, totalInterest, deposits} = {}) => {
+  static equation = ({principal, burnAmount, burnPeriod, totalInterest, deposits} = {}) => {
     totalInterest = 0.0;
     deposits = 0.0;
+    if (burnPeriod === 30) {
+      burnAmount = burnAmount * 12;
+    }
     return parseInt((principal+totalInterest+deposits)/burnAmount, 10);
   }
 }
