@@ -2,7 +2,7 @@ import React from 'react';
 import LineGraph from '../graphs/line';
 
 import TextField from '@material-ui/core/TextField';
-import getField from './fields/Field';
+import Input from './inputs/Input';
 
 export default class Equation extends React.Component {  
   constructor(props) {
@@ -41,12 +41,10 @@ export default class Equation extends React.Component {
     let attribs = []
 
     for (const [name, paramConfig] of Object.entries(config.params)) {
-      const {label, type} = paramConfig;
-      const Field = getField(type);
-      attribs.push(<Field
-                    id={name} 
+      attribs.push(<Input
+                    name={name} 
                     key={name}
-                    label={label}
+                    config={paramConfig}
                     value={this.state[name]}
                     onChange={this.handleChange}
                   />);
