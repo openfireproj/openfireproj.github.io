@@ -72,7 +72,7 @@ export default class Equation extends React.Component {
       <div id={`${config.id}-equation`}>
         <form id={config.id} name={config.id}> 
           <fieldset>
-            <legend>{config.id}</legend>
+            <legend>{config.title}</legend>
             <p>{config.description}</p>
             {attribs}
             {widgets}
