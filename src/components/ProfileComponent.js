@@ -1,6 +1,6 @@
 import React from 'react';
 import {Profile} from '../Profile';
-import MoneyInput from '../components/fields/Money';
+import MoneyInput from '../components/inputs/Money';
 
 export class ProfileComponent extends React.Component {
   constructor(props) {
@@ -27,9 +27,9 @@ export class ProfileComponent extends React.Component {
     for (const key in this.state) {
       attribs.push(
         <MoneyInput id={key} 
-            label={key}
+            name={key}
             key={key}
-            fieldKey={key}
+            config={{ label: key }}
             value={this.state[key]}
             onChange={this.handleChange} />
       )
