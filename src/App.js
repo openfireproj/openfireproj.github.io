@@ -5,16 +5,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import {ProfileComponent} from './components/ProfileComponent';
+import Profile from './Profile';
 import Welcome from './Welcome';
+import {ProfileComponent} from './components/ProfileComponent';
 
 import Window from './components/Window';
 
 function App() {
-  const eqns = [
-    'endurance',
-    'com.mtgprofessor/monthly-payment'
-  ]
+  const eqns = Profile.windows('home'); 
 
   return (
     <div>

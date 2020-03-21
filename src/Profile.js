@@ -1,5 +1,6 @@
 let storage = require('local-storage');
 let PROFILE = 'profile'
+let WINDOWS = 'windows'
 
 
 export class Profile {
@@ -29,6 +30,21 @@ export class Profile {
     }
 
     return profile;
+  }
+
+  static windows(name=null) {
+    const windows = storage.get(WINDOWS) || {
+        'home': [
+          'endurance', 
+          'com.mtgprofessor/monthly-payment'
+        ]
+    }
+
+    if ( name === null ) {
+        return windows;
+    }
+
+    return windows[name]
   }
 }
 
