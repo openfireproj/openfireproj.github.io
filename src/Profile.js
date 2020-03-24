@@ -35,7 +35,7 @@ export class Profile {
   static windows(name=null) {
     const windows = storage.get(WINDOWS) || {
         'home': [
-          'endurance', 
+          'compound-interest', 
           'com.mtgprofessor/monthly-payment'
         ]
     }
