@@ -11,31 +11,31 @@ export default class SelectInput extends React.Component {
     // because options are static, we only need to build them once.
     //so we do it here in the constructor and assign it as an instance variable on the class
     this.options = [];    
-    for (const [display, val] of Object.entries(this.props.options)) {
+    for (const [display, val] of Object.entries(this.props.config.options)) {
       this.options.push(
-        <MenuItem value={val}>{display}</MenuItem>
+        <MenuItem key={val} value={val}>{display}</MenuItem>
       )
     }
   }
 
   handleChange = (event, value) => {
-    const { fieldKey, onChange } = this.props;
-    onChange(fieldKey, event.target.value);
+    const { name, onChange } = this.props;
+    onChange(name, event.target.value);
   }
 
   render() {
-    const { fieldKey, label, value } = this.props;
-    const inputId = `select-input-${label}`;
+    const { name, config, value } = this.props;
+    const inputId = `select-input-${config.label}`;
     return (
       // TODO: replace inline style with CSS
       <div className="MuiFormControl-root" style={{paddingLeft: "10px", paddingRight: "10px"}}>
-        <InputLabel shrink htmlFor={fieldKey}>{label}</InputLabel>   
+        <InputLabel shrink htmlFor={name}>{config.label}</InputLabel>   
         <Select
           value={value}
           onChange={this.handleChange}
           inputProps={{
-            name: {fieldKey},
-            id: {inputId},
+            name: name,
+            id: inputId,
           }}
         >
           {this.options}

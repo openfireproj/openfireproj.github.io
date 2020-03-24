@@ -1,8 +1,8 @@
 import React from 'react';
 import LineGraph from '../graphs/line';
-import MoneyInput from '../components/inputs/Money';
-import SelectInput from '../components/inputs/Select';
+
 import TextField from '@material-ui/core/TextField';
+import Input from './inputs/Input';
 
 export default class Equation extends React.Component {  
   constructor(props) {
@@ -39,32 +39,16 @@ export default class Equation extends React.Component {
     const { config } = this.props;
     let widgets = [];
     let attribs = []
-    
-    for (const [param, paramConfig] of Object.entries(config.params)) {
-      if (paramConfig.type === "currency") {
-        attribs.push(
-          <MoneyInput
-            id={param} 
-            label={paramConfig.label}
-            key={param}
-            fieldKey={param}
-            value={this.state[param]}
-            onChange={this.handleChange}
-          />
-        );
-      } else if (paramConfig.type === "select") {
-        attribs.push(
-          <SelectInput
-            id={param}
-            label={paramConfig.label}
-            key={param}
-            fieldKey={param}
-            options={paramConfig.options}
-            value={this.state[param]}    
-            onChange={this.handleChange}
-          />
-        )
-      }
+
+    for (const [name, paramConfig] of Object.entries(config.params)) {
+      attribs.push(<Input
+                    name={name} 
+                    key={name}
+                    config={paramConfig}
+                    value={this.state[name]}
+                    onChange={this.handleChange}
+                  />);
+
     }
     attribs.push(
       <TextField

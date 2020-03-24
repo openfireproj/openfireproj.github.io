@@ -27,9 +27,9 @@ export class ProfileComponent extends React.Component {
     for (const key in this.state) {
       attribs.push(
         <MoneyInput id={key} 
-            label={key}
+            name={key}
             key={key}
-            fieldKey={key}
+            config={{ label: key }}
             value={this.state[key]}
             onChange={this.handleChange} />
       )
