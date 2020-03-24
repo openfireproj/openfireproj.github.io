@@ -32,6 +32,7 @@ export default class Config {
   static equation =  ({principal, rate, periods} = {}) => {
       return principal * exp(rate*periods);
   }
+
 }
 
 export const compoundInterestWithMonthlyContributions = 

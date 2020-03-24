@@ -12,7 +12,6 @@ import Equation from './components/Equation';
 
 import Endurance from './equations/endurance';
 import Monthly from './equations/com.mtgprofessor/monthly-payment';
-import Pert from './equations/compound-interest';
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
       <Welcome/>
       <Equation config={Endurance} />
       <Equation config={Monthly} />
-      <Equation config={Pert} />
       <ProfileComponent/>
     </div>
   );
