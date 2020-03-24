@@ -5,26 +5,25 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import {ProfileComponent} from './components/ProfileComponent';
+import Profile from './Profile';
 import Welcome from './Welcome';
+import {ProfileComponent} from './components/ProfileComponent';
 
-import Equation from './components/Equation';
-
-import Endurance from './equations/endurance';
-import Monthly from './equations/com.mtgprofessor/monthly-payment';
+import Window from './components/Window';
 
 function App() {
+  const eqns = Profile.windows('home'); 
+
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">Open Fire</Typography>
+          <Typography variant="h6">Open FI/RE</Typography>
         </Toolbar>
       </AppBar>
       <Welcome/>
-      <Equation config={Endurance} />
-      <Equation config={Monthly} />
       <ProfileComponent/>
+      <Window equations={eqns}/>
     </div>
   );
 }
